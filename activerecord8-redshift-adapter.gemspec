@@ -31,4 +31,6 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 3.2'
   s.add_runtime_dependency 'activerecord', '>= 8.1', '< 9.0'
   s.add_runtime_dependency 'pg', '~> 1.0'
+  s.add_development_dependency 'rake', '~> 13.0'
+  s.add_development_dependency 'minitest', '~> 5.0'
 end

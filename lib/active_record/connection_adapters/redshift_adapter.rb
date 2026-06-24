@@ -197,7 +197,7 @@ module ActiveRecord
       end
 
       # Clears the prepared statements cache.
-      def clear_cache!
+      def clear_cache!(new_connection: false)
         @statements.clear
       end
 
@@ -721,7 +721,7 @@ module ActiveRecord
             PG::TextDecoder::TimestampWithoutTimeZone
           end
 
-        @timestamp_decoder = decoder_class.new(@timestamp_decoder.to_h)
+        @timestamp_decoder = decoder_class.new(**@timestamp_decoder.to_h)
         @connection.type_map_for_results.add_coder(@timestamp_decoder)
         @default_timezone = ActiveRecord.default_timezone
 
