@@ -1,17 +1,16 @@
-*.rbc
-*.sassc
-.sass-cache
-capybara-*.html
-.rspec
-/.bundle
-/vendor/bundle
-/log/*
-/tmp/*
-/db/*.sqlite3
-/public/system/*
+# Build artifacts
+*.gem
+/pkg/
+
+# Bundler
+/.bundle/
+/vendor/bundle/
+
+# Local env
+/.byebug_history
 /coverage/
-/spec/tmp/*
-**.orig
-rerun.txt
-pickle-email-*.html
-Gemfile.lock
+/tmp/
+
+# IDE / editor
+/.ruby-lsp/
+.DS_Store
