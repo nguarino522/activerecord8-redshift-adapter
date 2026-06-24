@@ -1,8 +1,8 @@
 activerecord-redshift-adapter
 ==============================
 
-Amazon Redshift adapter for ActiveRecord 8 (Rails 8).
-I forked the project from https://github.com/38degrees/activerecord7-redshift-adapter
+Amazon Redshift adapter for ActiveRecord 8 (Rails 8.1).
+I forked the project from https://github.com/charitywater/activerecord-redshift-adapter
 
 Thanks for the authors.
 
