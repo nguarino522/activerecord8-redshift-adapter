@@ -130,4 +130,4 @@ bundle exec ruby test/smoke.rb
 License
 -------
 
-MIT license (same as ActiveRecord).
+Dual-licensed under MIT (Rails-derived code) and BSD-3-Clause (Fiksu Redshift-specific portions). See [`LICENSE`](LICENSE) for full text.

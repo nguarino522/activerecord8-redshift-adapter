@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.version = '1.0.0'
   s.summary = 'Amazon Redshift adapter for ActiveRecord 8 (Rails 8.1)'
   s.description = 'Amazon Redshift adapter for ActiveRecord 8.x, updated for Rails 8.1 compatibility.'
-  s.license = 'MIT'
+  s.licenses = ['MIT', 'BSD-3-Clause']
 
   s.author = [
     'Nicholas Guarino',
