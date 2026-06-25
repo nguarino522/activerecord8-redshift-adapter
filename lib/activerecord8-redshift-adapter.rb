@@ -1,0 +1,1 @@
+require "redshift_adapter"
