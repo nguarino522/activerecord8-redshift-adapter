@@ -1,14 +1,22 @@
-# test/smoke_test.rb
+# test/smoke.rb
+#
+# Ad-hoc smoke test against a real Redshift cluster.
+# Not part of the rake task. Run with:
+#
+#   PGHOST=my-cluster.xxxxxx.us-east-1.redshift.amazonaws.com \
+#   PGPORT=5439 PGDATABASE=analytics PGUSER=... PGPASSWORD=... \
+#   bundle exec ruby test/smoke.rb
+
 require "active_record"
 require "redshift_adapter"
 
 ActiveRecord::Base.establish_connection(
   adapter:  "redshift",
-  host:     ENV.fetch("REDSHIFT_HOST"),
-  port:     ENV.fetch("REDSHIFT_PORT", 5439).to_i,
-  database: ENV.fetch("REDSHIFT_DB"),
-  username: ENV.fetch("REDSHIFT_USER"),
-  password: ENV.fetch("REDSHIFT_PASS")
+  host:     ENV.fetch("PGHOST"),
+  port:     ENV.fetch("PGPORT", 5439).to_i,
+  database: ENV.fetch("PGDATABASE"),
+  username: ENV.fetch("PGUSER"),
+  password: ENV.fetch("PGPASSWORD")
 )
 
 puts ActiveRecord::Base.connection.select_value("SELECT 1")

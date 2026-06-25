@@ -1,7 +1,11 @@
 activerecord8-redshift-adapter
 ==============================
 
-Amazon Redshift adapter for ActiveRecord 8 (Rails 8).
+[![Test](https://github.com/nguarino522/activerecord8-redshift-adapter/actions/workflows/test.yml/badge.svg)](https://github.com/nguarino522/activerecord8-redshift-adapter/actions/workflows/test.yml)
+[![Gem Version](https://badge.fury.io/rb/activerecord8-redshift-adapter.svg)](https://rubygems.org/gems/activerecord8-redshift-adapter)
+[![License](https://img.shields.io/badge/license-MIT%20%26%20BSD--3--Clause-blue)](LICENSE)
+
+Amazon Redshift adapter for ActiveRecord 8.1 (Rails 8.1).
 
 Forked from [charitywater/activerecord-redshift-adapter](https://github.com/charitywater/activerecord-redshift-adapter) (which itself descends from the original [fiksu/activerecord-redshift-adapter](https://github.com/fiksu/activerecord-redshift-adapter)). The prior forks targeted Rails 8.0; this gem updates the adapter to work with the changes introduced in ActiveRecord 8.1. Thanks to all the prior authors.
 
@@ -50,10 +54,41 @@ class SomeModel < ApplicationRecord
 end
 ```
 
+### Typical pattern: Redshift as a secondary read-only connection
+
+Most apps use Redshift alongside a primary OLTP database (Postgres, MySQL). With ActiveRecord multi-database support:
+
+```yaml
+production:
+  primary:
+    adapter: postgresql
+    database: app_production
+    # ...
+  warehouse:
+    adapter: redshift
+    host: my-cluster.xxxxxx.us-east-1.redshift.amazonaws.com
+    port: 5439
+    database: analytics
+    username: app_reader
+    password: <%= ENV["REDSHIFT_PASSWORD"] %>
+    replica: true
+```
+
+```ruby
+class AnalyticsRecord < ApplicationRecord
+  self.abstract_class = true
+  connects_to database: { reading: :warehouse }
+end
+
+class PageView < AnalyticsRecord
+  self.table_name = "page_views"
+end
+```
+
 Compatibility
 -------------
 
-- Ruby `>= 3.2`
+- Ruby `>= 3.2` (tested on 3.2, 3.3, 3.4)
 - ActiveRecord `>= 8.1, < 9.0` (Rails 8.1)
 - `pg` `~> 1.0`
 
