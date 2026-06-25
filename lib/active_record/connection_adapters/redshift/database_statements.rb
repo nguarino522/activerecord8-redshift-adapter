@@ -192,7 +192,7 @@ module ActiveRecord
           super
         end
 
-        def exec_insert(sql, name, binds, pk = nil, sequence_name = nil)
+        def exec_insert(sql, name = nil, binds = [], pk = nil, sequence_name = nil, returning: nil)
           val = exec_query(sql, name, binds)
           if !use_insert_returning? && pk
             unless sequence_name
