@@ -81,3 +81,53 @@ License
 -------
 
 MIT license (same as ActiveRecord).
+
+Testing
+-------
+
+The test suite runs against a local **PostgreSQL** database (Redshift is wire-compatible with Postgres 8.0, so most adapter behavior can be exercised locally). For Redshift-specific behavior — `RETURNING`, identity columns, distribution keys, system catalogs — run the smoke script against a real cluster (see below).
+
+### Prerequisites
+
+- PostgreSQL running locally (any reasonably modern version)
+- A database the test user can connect to and create tables in
+
+```bash
+createdb redshift_adapter_test
+```
+
+### Running the suite
+
+```bash
+bundle install
+bundle exec rake test
+```
+
+Connection settings come from standard `PG*` environment variables, with sensible defaults:
+
+| Variable     | Default                 |
+| ------------ | ----------------------- |
+| `PGHOST`     | `localhost`             |
+| `PGPORT`     | `5432`                  |
+| `PGDATABASE` | `redshift_adapter_test` |
+| `PGUSER`     | `$USER`                 |
+| `PGPASSWORD` | _(unset)_               |
+
+Override any of them inline, e.g.:
+
+```bash
+PGUSER=postgres PGPASSWORD=secret bundle exec rake test
+```
+
+### Smoke-testing against real Redshift
+
+`test/smoke.rb` is a small ad-hoc script (not part of the rake task) that connects to a real Redshift cluster using the same env vars and exercises basic queries. Use it to validate the adapter against your actual cluster before deploying:
+
+```bash
+PGHOST=my-cluster.xxxxxx.us-east-1.redshift.amazonaws.com \
+PGPORT=5439 \
+PGDATABASE=analytics \
+PGUSER=myuser \
+PGPASSWORD=... \
+bundle exec ruby test/smoke.rb
+```
