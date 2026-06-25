@@ -77,11 +77,6 @@ To release a new version, bump `s.version` in the gemspec, tag the commit, then:
 gem push activerecord8-redshift-adapter-<version>.gem
 ```
 
-License
--------
-
-MIT license (same as ActiveRecord).
-
 Testing
 -------
 
@@ -131,3 +126,8 @@ PGUSER=myuser \
 PGPASSWORD=... \
 bundle exec ruby test/smoke.rb
 ```
+
+License
+-------
+
+MIT license (same as ActiveRecord).
