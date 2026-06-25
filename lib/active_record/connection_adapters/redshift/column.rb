@@ -9,8 +9,8 @@ module ActiveRecord
       mattr_reader :array, default: false
       alias array? array
 
-      def initialize(name, default, sql_type_metadata, null = true, default_function = nil, **)
-        super name, default, sql_type_metadata, null, default_function
+      def initialize(name, cast_type, default, sql_type_metadata = nil, null = true, default_function = nil, **)
+        super
       end
     end
   end
