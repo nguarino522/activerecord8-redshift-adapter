@@ -106,7 +106,7 @@ bundle install
 gem build activerecord8-redshift-adapter.gemspec
 ```
 
-To release a new version, bump `s.version` in the gemspec, tag the commit, then:
+To release a new version (maintainers), bump `s.version` in the gemspec, tag the commit, then:
 
 ```bash
 gem push activerecord8-redshift-adapter-<version>.gem
